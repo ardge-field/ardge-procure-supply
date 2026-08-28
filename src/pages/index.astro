@@ -1,0 +1,406 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// 基本規格（軟體）— 規格書大項次，條列事實，不含效益說明
+const specs = [
+  {
+    en: 'Integrated with APMIC Financial LLM',
+    zh: '行業專業模型整合',
+    d: '預載內建 APMIC 金融專業大語言模型，支援自然語言查詢法規與市場知識、自動摘要研究報告與合約文件，並輔助投研判讀。',
+  },
+  {
+    en: 'Multi-Compatible API Endpoints',
+    zh: '統整管理 API 端點服務',
+    d: '各類模型統一發布為 OpenAI 與 Anthropic 相容的標準 API 端點，可沿用既有 SDK 串接，並支援模型間切換。',
+  },
+  {
+    en: 'AI Engine Platform',
+    zh: '內建多引擎模型中台',
+    d: '支援多推論引擎、地端部署與 GPU 資源配置；具 GPU 共享、模型資源預測、API Key 生命週期管理、RPM 流量控管與使用量統計。',
+  },
+  {
+    en: 'Model Permission Control',
+    zh: '模型權限控管',
+    d: '模型層級（Model-level）權限控管，可依部門、角色與應用分別授權可調用的模型實例。',
+  },
+  {
+    en: 'Model Usage Dashboard',
+    zh: '模型使用量儀表板',
+    d: '依模型統計請求數、Token 用量、回應時間、GPU 使用率、GPU 記憶體使用率與配置，支援即時／日／3 日／週檢視。',
+  },
+  {
+    en: 'Project-based LLM Service Isolation',
+    zh: '專案級別模型隔離',
+    d: '依部門或專案獨立啟動模型實例（支援一對一或一對多部署），配置專屬模型服務與知識空間，支援資料分艙。',
+  },
+  {
+    en: 'One-click Model Deployment',
+    zh: '一鍵模型部署',
+    d: '一鍵導入 APMIC 金融模型、企業自有模型或核備開源模型（整合 Hugging Face），自動配置推論引擎與 GPU 資源。',
+  },
+  {
+    en: 'Model Lifecycle Management',
+    zh: '模型生命週期管理',
+    d: '涵蓋模型上架、版本控管、更新與多版平測，並支援手動切換回先前的穩定版本。',
+  },
+  {
+    en: 'Sensitive Data Stays On-prem',
+    zh: '敏感資料留存地端',
+    d: '模型、文件、向量資料庫、Log 與金融資料完整保留於內網、自有機房或 Air-gapped 環境。',
+  },
+  {
+    en: 'GUI-based Operation Console',
+    zh: '圖形化操作主控台',
+    d: '瀏覽器即可遠端存取的圖形化介面，集中管理模型、API 端點、API Key、App、GPU、系統資源、程序監控、存取與事件日誌、儲存掛載，並支援 OTA 遠端更新。',
+  },
+  {
+    en: 'Admin Dashboard & System Monitoring',
+    zh: '管理儀表板與系統監控',
+    d: '即時監控 GPU、VRAM、GPU 溫度、CPU、RAM、網路、儲存空間、磁碟溫度、程序資源與告警，並集中呈現各服務名稱、類別、狀態與連接埠。',
+  },
+  {
+    en: 'Security Control',
+    zh: '安全控管',
+    d: '黑白名單與 IP 自動封鎖、API 存取控管與日誌；帳號角色權限與職責分離；稽核軌跡；LLM 安全閘道即時遮罩 PII 與金鑰（in-memory 處理、還原僅存地端）；提供 SBOM 佐證文件。',
+  },
+  {
+    en: 'Backup & Restore',
+    zh: '備份與還原',
+    d: '支援 App、模型與向量資料庫備份，並可跨機器（異機）還原。',
+  },
+  {
+    en: 'Agent / MCP / CLI Integration',
+    zh: '多重整合介面',
+    d: '支援 Agent、MCP、CLI 與 API 等多元整合介面，可整合主流代理式程式設計工具，且無需額外訂閱費用。',
+  },
+  {
+    en: 'Data Integration & App Market',
+    zh: '資料整合與 App 商店',
+    d: '支援 NAS 等遠端儲存掛載、App 商店一鍵安裝 GenAI 應用；內建 RAG、OCR 與音視訊轉譯等資料前處理工具。',
+  },
+];
+
+// 建議硬體規格 — ARDGE ARX-100 基礎版 AI 一體機
+const hardware = [
+  ['AI 伺服主機', 'NVIDIA Blackwell (GB10) 含以上'],
+  ['作業系統', 'ARX OS'],
+  ['中央處理器 CPU', 'ARM v9.2-A CPU 含以上'],
+  ['圖形處理器 GPU', 'NVIDIA Blackwell GPU 含以上'],
+  ['記憶體 Memory', '128 GB LPDDR5x 含以上'],
+  ['磁碟儲存 Storage', '1TB M.2 NVMe PCIe 4.0 SSD 含以上'],
+  ['網路介面 LAN', '1 x 10 Gigabit Ethernet／1 x NVIDIA ConnectX-7 SmartNIC'],
+];
+---
+
+<BaseLayout>
+  <Header />
+
+  <main id="top">
+    <!-- 標題（規格公告） -->
+    <section class="masthead">
+      <div class="wrap">
+        <p class="eyebrow">政府採購共同供應契約</p>
+        <h1>ARX OS 金融行業版</h1>
+        <p class="masthead-sub">ARX OS 是專為地端環境打造的 AI 管理平台，將作業系統、推論引擎、模型與資料治理整合於單一系統。企業無須自建複雜環境，即可在自有機房或 Air-gapped 網路中，快速部署、管理並擴展生成式 AI 模型與應用，兼顧資料主權與維運效率。</p>
+      </div>
+    </section>
+
+    <!-- 採購契約資訊 -->
+    <section class="frames">
+      <div class="wrap">
+        <p class="eyebrow">供應商資格</p>
+        <article class="contract-block">
+          <h2>116 年第一次電腦軟體共同供應契約採購</h2>
+          <dl class="contract-list">
+            <div><dt>廠牌</dt><dd>ARDGE</dd></div>
+            <div><dt>原廠名稱</dt><dd>ARDGE</dd></div>
+            <div><dt>產地</dt><dd>台灣</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <!-- 基本規格（軟體） -->
+    <section class="section" id="specs">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">基本規格</p>
+          <dl class="spec-meta">
+            <div><dt>品項</dt><dd>ARX OS 金融行業版</dd></div>
+            <div><dt>組別</dt><dd>人工智慧與數據應用</dd></div>
+          </dl>
+        </div>
+        <ol class="spec-list">
+          {specs.map((s, i) => (
+            <li class="spec-item">
+              <span class="spec-no">{String(i + 1).padStart(2, '0')}</span>
+              <span class="spec-name">{s.zh}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- 建議硬體規格 -->
+    <section class="section section-alt" id="hardware">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">建議硬體規格</p>
+        </div>
+        <div class="hw-table" role="table" aria-label="ARX-100 建議硬體規格">
+          {hardware.map(([k, v]) => (
+            <div class="hw-row" role="row">
+              <span class="hw-k" role="cell">{k}</span>
+              <span class="hw-v" role="cell">{v}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 採購聯絡 -->
+    <section class="section contact" id="procure-contact">
+      <div class="wrap contact-inner">
+        <div>
+          <p class="eyebrow">採購洽詢</p>
+          <h2 class="sec-title">採購下單、規格確認或專案規劃</h2>
+        </div>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:usasales@ardge.com?subject=共同供應契約採購洽詢%20-%20ARX%20OS%20金融行業版">
+            usasales@ardge.com
+          </a>
+          <a class="btn btn-outline" href="https://www.ardge.com/zh#contact">前往聯絡表單</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* ---------- 標題 ---------- */
+  .masthead {
+    background:
+      radial-gradient(900px 380px at 85% -20%, var(--green-tint), transparent 60%),
+      var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding-block: 46px 36px;
+  }
+
+  .masthead h1 {
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .masthead-sub {
+    font-size: 1.02rem;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 68ch;
+  }
+
+  /* ---------- 採購契約資訊 ---------- */
+  .frames {
+    background: var(--paper-alt);
+    border-bottom: 1px solid var(--line);
+    padding-block: 32px;
+  }
+
+  .contract-block {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--green);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+  }
+
+  .contract-block h2 {
+    font-size: 1.2rem;
+    margin: 0 0 16px;
+  }
+
+  .contract-list {
+    margin: 0;
+    display: grid;
+    gap: 0;
+    max-width: 320px;
+  }
+
+  .contract-list > div {
+    display: flex;
+    gap: 16px;
+    padding: 9px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .contract-list dt {
+    color: var(--gray);
+    font-size: 0.92rem;
+    min-width: 84px;
+  }
+
+  .contract-list dd {
+    margin: 0;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- 區段共用 ---------- */
+  .section {
+    padding-block: 44px;
+  }
+
+  .section-alt {
+    background: var(--paper-alt);
+  }
+
+  .sec-head {
+    margin-bottom: 22px;
+  }
+
+  .spec-meta {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .spec-meta > div {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .spec-meta dt {
+    font-size: 0.95rem;
+    color: var(--gray);
+  }
+
+  .spec-meta dd {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .sec-title {
+    font-size: clamp(1.5rem, 3vw, 2.05rem);
+    margin: 0;
+  }
+
+  /* ---------- 規格清單（編號 + 中文項次，單欄，無分隔線）---------- */
+  .spec-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .spec-item {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 2px 4px;
+  }
+
+  .spec-no {
+    font-family: var(--font-en);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--green);
+    min-width: 28px;
+  }
+
+  .spec-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* ---------- 硬體表 ---------- */
+  .hw-table {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    max-width: 760px;
+  }
+
+  .hw-row {
+    display: grid;
+    grid-template-columns: 0.75fr 1.25fr;
+  }
+
+  .hw-row:nth-child(odd) {
+    background: #fff;
+  }
+
+  .hw-row:nth-child(even) {
+    background: var(--paper-alt);
+  }
+
+  .section-alt .hw-row:nth-child(odd) {
+    background: #fff;
+  }
+
+  .section-alt .hw-row:nth-child(even) {
+    background: #f0f2ee;
+  }
+
+  .hw-k,
+  .hw-v {
+    padding: 14px 20px;
+    font-size: 0.93rem;
+  }
+
+  .hw-k {
+    font-weight: 700;
+    color: var(--ink);
+    border-right: 1px solid var(--line);
+  }
+
+  .hw-v {
+    color: var(--ink-soft);
+  }
+
+  .hw-note {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin: 18px 0 0;
+  }
+
+  /* ---------- 採購聯絡 ---------- */
+  .contact-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 26px;
+  }
+
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ---------- 響應式 ---------- */
+  @media (max-width: 760px) {
+    .section {
+      padding-block: 48px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hw-row {
+      grid-template-columns: 1fr;
+    }
+    .hw-k {
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+    }
+  }
+</style>

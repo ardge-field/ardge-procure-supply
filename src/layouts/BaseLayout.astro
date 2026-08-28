@@ -1,0 +1,189 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = '共同供應契約採購 — ARX OS 金融行業版 | ARDGE',
+  description = '金融機構透過共同供應契約，免另行招標即可導入 ARDGE 地端 AI。ARX OS 金融行業版已完成廠商審查與比價程序，銀行、證券、保險、投信投顧可直接採購。',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://www.ardge.com/img/og-image.png" />
+    <meta property="og:locale" content="zh_TW" />
+    <link rel="icon" href="https://www.ardge.com/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    /* ARDGE 企業色 */
+    --green: #80bc00;
+    --green-deep: #6ba000;
+    --green-tint: #f2f8e6;
+    --gray: #636569;
+    --ink: #23252a;
+    --ink-soft: #52555c;
+    --line: #e4e6e3;
+    --paper: #ffffff;
+    --paper-alt: #f7f8f6;
+    --radius: 14px;
+    --maxw: 1160px;
+    --font-zh: 'Noto Sans TC', system-ui, -apple-system, 'PingFang TC',
+      'Microsoft JhengHei', sans-serif;
+    --font-en: 'Space Grotesk', var(--font-zh);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    * {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-zh);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.75;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1.25;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+
+  .eyebrow {
+    font-family: var(--font-en);
+    font-size: 1.02rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-deep);
+    margin: 0 0 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 30px;
+    height: 2px;
+    background: var(--green);
+    display: inline-block;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 13px 26px;
+    border-radius: 999px;
+    transition:
+      transform 0.15s ease,
+      background 0.15s ease,
+      box-shadow 0.15s ease;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--green);
+    color: #fff;
+    box-shadow: 0 8px 20px -8px rgba(128, 188, 0, 0.7);
+  }
+
+  .btn-primary:hover {
+    background: var(--green-deep);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    border-color: rgba(255, 255, 255, 0.45);
+    color: #fff;
+  }
+
+  .btn-ghost:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .btn-outline {
+    border-color: var(--line);
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--green);
+    color: var(--green-deep);
+    transform: translateY(-2px);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--green);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+</style>

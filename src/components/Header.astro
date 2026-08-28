@@ -1,0 +1,257 @@
+---
+// 頁首：沿用 ARDGE 官網導覽結構（產品 / 解決方案 / 關於 / 聯絡）
+const site = 'https://www.ardge.com';
+---
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href={`${site}/zh`} aria-label="ARDGE 首頁">
+      <img src={`${site}/img/logo/ardge-logo.webp`} alt="ARDGE" width="118" height="28" />
+    </a>
+
+    <nav class="nav" aria-label="主導覽">
+      <div class="nav-item has-menu">
+        <a href={`${site}/zh#products`}>產品</a>
+        <div class="menu">
+          <a href={`${site}/zh/products/arx-100`}><strong>ARX-100</strong><span>整合式邊緣 AI 設備</span></a>
+          <a href={`${site}/zh/products/varx-series`}><strong>vARX 系列</strong><span>私有 GPU 雲</span></a>
+          <a href={`${site}/zh/products/arx-os`}><strong>ARX OS</strong><span>地端 AI 管理平台</span></a>
+          <a href="#top" class="menu-current"><strong>共同供應契約採購</strong><span>ARX OS 金融行業版</span></a>
+        </div>
+      </div>
+
+      <div class="nav-item has-menu">
+        <span class="nav-label">解決方案</span>
+        <div class="menu">
+          <a href={`${site}/zh/solutions/ai-data-preprocessing`}><strong>AI 資料前處理引擎</strong><span>本地端文件解析與向量化</span></a>
+          <a href={`${site}/zh/solutions/private-intelligent-video-search`}><strong>私有智慧影片搜尋</strong><span>跨企業影音語意搜尋</span></a>
+          <a href={`${site}/zh/solutions/knowledge-management-appliance`}><strong>知識管理設備</strong><span>私有對話式 AI 知識庫</span></a>
+          <a href={`${site}/zh/solutions/private-ai-foundation-for-isv-partners`}><strong>ISV 夥伴私有 AI</strong><span>一站式私有 AI 部署</span></a>
+        </div>
+      </div>
+
+      <div class="nav-item"><a href={`${site}/zh#team`}>關於我們</a></div>
+      <div class="nav-item"><a href={`${site}/zh#contact`}>聯絡我們</a></div>
+    </nav>
+
+    <div class="header-right">
+      <a class="lang" href={`${site}/`}>EN</a>
+      <a class="cta-mini" href="#procure-contact">採購洽詢</a>
+      <button class="burger" aria-label="開啟選單" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="mobile-nav" aria-label="行動選單">
+    <a href={`${site}/zh#products`}>產品</a>
+    <a href={`${site}/zh/products/arx-os`}>ARX OS</a>
+    <a href={`${site}/zh/products/arx-100`}>ARX-100</a>
+    <a href="#top">共同供應契約採購</a>
+    <a href={`${site}/zh#team`}>關於我們</a>
+    <a href="#procure-contact">採購洽詢</a>
+    <a href={`${site}/`}>EN</a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+    gap: 20px;
+  }
+
+  .brand img {
+    height: 26px;
+    width: auto;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-item > a,
+  .nav-item > .nav-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    border-radius: 8px;
+  }
+
+  .nav-item > a:hover,
+  .nav-item > .nav-label:hover {
+    color: var(--green-deep);
+  }
+
+  .has-menu .menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 260px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 24px 48px -20px rgba(35, 37, 42, 0.28);
+    padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: all 0.18s ease;
+  }
+
+  .has-menu:hover .menu,
+  .has-menu:focus-within .menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .menu a {
+    display: flex;
+    flex-direction: column;
+    padding: 11px 14px;
+    border-radius: 9px;
+    line-height: 1.4;
+  }
+
+  .menu a:hover {
+    background: var(--green-tint);
+  }
+
+  .menu strong {
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .menu span {
+    font-size: 0.82rem;
+    color: var(--gray);
+  }
+
+  .menu-current {
+    background: var(--green-tint);
+  }
+
+  .menu-current strong {
+    color: var(--green-deep);
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .lang {
+    font-family: var(--font-en);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    color: var(--gray);
+    border-radius: 8px;
+  }
+
+  .lang:hover {
+    color: var(--green-deep);
+  }
+
+  .cta-mini {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--ink);
+    padding: 9px 18px;
+    border-radius: 999px;
+    transition: background 0.15s ease;
+  }
+
+  .cta-mini:hover {
+    background: var(--green-deep);
+  }
+
+  .burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .burger span {
+    height: 2px;
+    width: 20px;
+    background: var(--ink);
+    margin-inline: auto;
+    transition: 0.2s;
+  }
+
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    padding: 8px 24px 18px;
+    border-top: 1px solid var(--line);
+    background: #fff;
+  }
+
+  .mobile-nav a {
+    padding: 13px 4px;
+    font-weight: 500;
+    border-bottom: 1px solid var(--paper-alt);
+  }
+
+  .mobile-nav.open {
+    display: flex;
+  }
+
+  @media (max-width: 900px) {
+    .nav,
+    .cta-mini {
+      display: none;
+    }
+    .burger {
+      display: flex;
+    }
+  }
+</style>
+
+<script is:inline>
+  const burger = document.querySelector('.burger');
+  const mobileNav = document.querySelector('.mobile-nav');
+  burger?.addEventListener('click', () => {
+    const open = mobileNav?.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(!!open));
+  });
+  mobileNav?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      burger?.setAttribute('aria-expanded', 'false');
+    })
+  );
+</script>

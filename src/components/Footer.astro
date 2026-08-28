@@ -1,0 +1,118 @@
+---
+// 頁尾：沿用 ARDGE 官網頁尾結構
+const site = 'https://www.ardge.com';
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <img src={`${site}/img/logo/ardge-logo-white.webp`} alt="ARDGE" width="130" height="31" />
+      <p>為軟體創新者打造的 AI 部署後盾。讓 AI 順利進入市場，不再為地端部署煩惱。</p>
+    </div>
+
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>產品</h4>
+        <a href={`${site}/zh/products/arx-os`}>ARX OS</a>
+        <a href={`${site}/zh/products/arx-100`}>ARX-100</a>
+        <a href={`${site}/zh/products/varx-series`}>vARX 系列</a>
+        <a href="#top">共同供應契約採購</a>
+      </div>
+      <div class="footer-col">
+        <h4>解決方案</h4>
+        <a href={`${site}/zh/solutions/ai-data-preprocessing`}>AI 資料前處理</a>
+        <a href={`${site}/zh/solutions/private-intelligent-video-search`}>私有影片搜尋</a>
+        <a href={`${site}/zh/solutions/knowledge-management-appliance`}>知識管理</a>
+        <a href={`${site}/zh/solutions/private-ai-foundation-for-isv-partners`}>ISV 夥伴私有 AI</a>
+      </div>
+      <div class="footer-col">
+        <h4>公司</h4>
+        <a href={`${site}/zh#team`}>關於我們</a>
+        <a href={`${site}/zh#contact`}>聯絡我們</a>
+        <a href="mailto:usasales@ardge.com">usasales@ardge.com</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap footer-bottom">
+    <span>Copyright © 2025-2026 ARDGE. 保留一切權利。</span>
+    <span>105 台灣台北市松山區南京東路四段 130 號 12 樓之 1</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ink);
+    color: #c9cbce;
+    padding-top: 64px;
+    margin-top: 0;
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1.3fr 2fr;
+    gap: 48px;
+    padding-bottom: 48px;
+  }
+
+  .footer-brand img {
+    height: 30px;
+    width: auto;
+    margin-bottom: 18px;
+  }
+
+  .footer-brand p {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: #9a9da2;
+    max-width: 320px;
+    margin: 0;
+  }
+
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .footer-col h4 {
+    color: #fff;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    margin: 0 0 16px;
+    font-weight: 700;
+  }
+
+  .footer-col a {
+    display: block;
+    font-size: 0.9rem;
+    color: #9a9da2;
+    padding: 6px 0;
+    transition: color 0.15s ease;
+  }
+
+  .footer-col a:hover {
+    color: var(--green);
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+    padding-block: 26px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.82rem;
+    color: #74777c;
+  }
+
+  @media (max-width: 760px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .footer-cols {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
