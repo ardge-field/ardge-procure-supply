@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Package source
+        run: |
+          zip -r "ardge-procure-supply-src-${GITHUB_REF_NAME}.zip" . \
+            -x "node_modules/*" -x "dist/*" -x ".astro/*" -x ".git/*"
+
+      - name: Package built site
+        run: |
+          (cd dist && zip -r "../ardge-procure-supply-site-${GITHUB_REF_NAME}.zip" .)
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            ardge-procure-supply-src-${{ github.ref_name }}.zip
+            ardge-procure-supply-site-${{ github.ref_name }}.zip

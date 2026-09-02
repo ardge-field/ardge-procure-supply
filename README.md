@@ -32,6 +32,19 @@ npm run preview  # 預覽 build 結果
 - 在 `public/` 放一個 `CNAME` 檔，內容為你的網域。
 - 於 DNS 設定 CNAME 指向 `你的帳號.github.io`。
 
+## 建立正式 Release（自動打包）
+
+`.github/workflows/release.yml` 會在推送符合 `v*.*.*` 的 git tag 時自動觸發：build 網站、打包原始碼與 `dist/` 建置產物成兩個 zip，並建立 GitHub Release 附上這兩個檔案。
+
+發新版本只需要：
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+完成後到 repo 的 **Releases** 分頁即可看到自動產生的版本與附件。
+
 ## 內容來源與維護
 
 - 產品規格：`src/pages/index.astro` 最上方的 `features` 陣列（15 大功能項次）。
