@@ -1,5 +1,5 @@
 ---
-// 頁首：沿用 ARDGE 官網導覽結構（產品 / 解決方案 / 關於 / 聯絡）
+// 頁首：沿用 ARDGE 官網導覽結構（產品 / 解決方案 / 關於我們 / 購買通路），末端新增「共同供應契約專區」
 const site = 'https://www.ardge.com';
 ---
 
@@ -11,27 +11,38 @@ const site = 'https://www.ardge.com';
 
     <nav class="nav" aria-label="主導覽">
       <div class="nav-item has-menu">
-        <a href={`${site}/zh#products`}>產品</a>
+        <span class="nav-label">產品</span>
         <div class="menu">
-          <a href={`${site}/zh/products/arx-100`}><strong>ARX-100</strong><span>整合式邊緣 AI 設備</span></a>
-          <a href={`${site}/zh/products/varx-series`}><strong>vARX 系列</strong><span>私有 GPU 雲</span></a>
-          <a href={`${site}/zh/products/arx-os`}><strong>ARX OS</strong><span>地端 AI 管理平台</span></a>
-          <a href="#top" class="menu-current"><strong>共同供應契約採購</strong><span>ARX OS 金融行業版</span></a>
+          <a href={`${site}/zh/products/arx-100`}><strong>ARX-100</strong><span>邊緣 AI 伺服器</span></a>
+          <a href={`${site}/zh/products/varx-series`}><strong>vARX 系列</strong><span>私有 GPU 雲平台</span></a>
+          <a href={`${site}/zh/products/arx-os`}><strong>ARX OS</strong><span>邊緣 AI 平台</span></a>
+          <a href={`${site}/zh/products/arx-sovereign-ai-private-cloud`}><strong>主權私有 AI 雲</strong><span>企業級邊緣 AI 平台</span></a>
         </div>
       </div>
 
       <div class="nav-item has-menu">
         <span class="nav-label">解決方案</span>
         <div class="menu">
+          <a href={`${site}/zh/solutions/doclake`}><strong>DOC-100</strong><span>私有海量智慧平台</span></a>
           <a href={`${site}/zh/solutions/ai-data-preprocessing`}><strong>AI 資料前處理引擎</strong><span>本地端文件解析與向量化</span></a>
-          <a href={`${site}/zh/solutions/private-intelligent-video-search`}><strong>私有智慧影片搜尋</strong><span>跨企業影音語意搜尋</span></a>
-          <a href={`${site}/zh/solutions/knowledge-management-appliance`}><strong>知識管理設備</strong><span>私有對話式 AI 知識庫</span></a>
-          <a href={`${site}/zh/solutions/private-ai-foundation-for-isv-partners`}><strong>ISV 夥伴私有 AI</strong><span>一站式私有 AI 部署</span></a>
+          <a href={`${site}/zh/solutions/private-intelligent-video-search`}><strong>私有智慧影片搜尋</strong><span>跨企業影音資料的語意搜尋</span></a>
+          <a href={`${site}/zh/solutions/knowledge-management-appliance`}><strong>知識管理設備</strong><span>私有、對話式 AI 知識庫</span></a>
+          <a href={`${site}/zh/solutions/private-ai-foundation-for-isv-partners`}><strong>ISV 夥伴私有 AI 基礎平台</strong><span>為 ISV 與 SaaS 廠商提供一站式私有 AI 部署</span></a>
         </div>
       </div>
 
-      <div class="nav-item"><a href={`${site}/zh#team`}>關於我們</a></div>
-      <div class="nav-item"><a href={`${site}/zh#contact`}>聯絡我們</a></div>
+      <div class="nav-item has-menu">
+        <span class="nav-label">關於我們</span>
+        <div class="menu menu-sm">
+          <a href={`${site}/zh#team`}><strong>關於 ARDGE</strong></a>
+          <a href={`${site}/zh/newsroom`}><strong>最新消息</strong></a>
+          <a href={`${site}/zh/resources`}><strong>資源中心</strong></a>
+          <a href={`${site}/zh/contact`}><strong>聯絡我們</strong></a>
+        </div>
+      </div>
+
+      <div class="nav-item"><a href={`${site}/zh/where-to-buy`}>購買通路</a></div>
+      <div class="nav-item"><a href="#top" class="nav-current" aria-current="page">共同供應契約專區</a></div>
     </nav>
 
     <div class="header-right">
@@ -44,11 +55,15 @@ const site = 'https://www.ardge.com';
   </div>
 
   <nav class="mobile-nav" aria-label="行動選單">
-    <a href={`${site}/zh#products`}>產品</a>
-    <a href={`${site}/zh/products/arx-os`}>ARX OS</a>
     <a href={`${site}/zh/products/arx-100`}>ARX-100</a>
-    <a href="#top">共同供應契約採購</a>
-    <a href={`${site}/zh#team`}>關於我們</a>
+    <a href={`${site}/zh/products/varx-series`}>vARX 系列</a>
+    <a href={`${site}/zh/products/arx-os`}>ARX OS</a>
+    <a href={`${site}/zh/products/arx-sovereign-ai-private-cloud`}>主權私有 AI 雲</a>
+    <a href={`${site}/zh/solutions/doclake`}>DOC-100</a>
+    <a href={`${site}/zh#team`}>關於 ARDGE</a>
+    <a href={`${site}/zh/contact`}>聯絡我們</a>
+    <a href={`${site}/zh/where-to-buy`}>購買通路</a>
+    <a href="#top" class="mobile-current">共同供應契約專區</a>
     <a href="#procure-contact">採購洽詢</a>
     <a href={`${site}/`}>EN</a>
   </nav>
@@ -150,12 +165,19 @@ const site = 'https://www.ardge.com';
     color: var(--gray);
   }
 
-  .menu-current {
+  .menu-sm {
+    min-width: 160px;
+  }
+
+  .nav-item > a.nav-current {
+    color: var(--green-deep);
+    font-weight: 700;
     background: var(--green-tint);
   }
 
-  .menu-current strong {
+  .mobile-nav a.mobile-current {
     color: var(--green-deep);
+    font-weight: 700;
   }
 
   .header-right {
@@ -230,7 +252,7 @@ const site = 'https://www.ardge.com';
     display: flex;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1080px) {
     .nav,
     .cta-mini {
       display: none;

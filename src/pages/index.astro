@@ -3,86 +3,70 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-// 基本規格（軟體）— 規格書大項次，條列事實，不含效益說明
-const specs = [
+// 上架品項 — 資料來源 ref/BOM_20261008.xlsx（輸入欄位）；不含價格、需求規格與驗收文件草稿
+const items = [
   {
-    en: 'Integrated with APMIC Financial LLM',
-    zh: '行業專業模型整合',
-    d: '預載內建 APMIC 金融專業大語言模型，支援自然語言查詢法規與市場知識、自動摘要研究報告與合約文件，並輔助投研判讀。',
+    sku: 'ARX-100-OS',
+    name: 'ARX 圖形化本地端私有 AI 模型管理中心',
+    billing: '永久授權',
+    deliver: 'ARX-100-OS 軟體及永久授權 1 套',
+    pair: '依模型與 APP 需求確認相容套件、模型授權及依賴。',
+    func: '提供 Web 圖形化 AI 模型管理與部署介面，支援 Hugging Face 等模型來源及模型安裝、下載、啟用／停用與服務狀態管理。支援 API Key 發行與管理、標準 API Endpoint 建立、AI APP 上架及啟用／停用；提供 CPU、Memory、Storage、GPU 資源監控，及 Inference、Vector DB、RAG 服務狀態、系統 Log／執行紀錄與使用者／管理者權限管理。供內部系統、AI Agent、RAG 應用串接本地端模型服務。',
   },
   {
-    en: 'Multi-Compatible API Endpoints',
-    zh: '統整管理 API 端點服務',
-    d: '各類模型統一發布為 OpenAI 與 Anthropic 相容的標準 API 端點，可沿用既有 SDK 串接，並支援模型間切換。',
+    sku: 'PreciseMD-SW',
+    name: 'PreciseMD 本地端 AI 文件資料前處理－可排程批量 PDF 轉 Markdown 檔應用服務 AI-Ready Data',
+    billing: '永久授權',
+    deliver: 'PreciseMD-SW 軟體及永久授權 1 套',
+    pair: '搭配 ARX-100-OS 依部署需求搭配',
+    func: '提供 PDF、掃描文件及圖文資料的本地端 AI 文件解析與前處理，支援 PDF 匯入、OCR 文字辨識、內容解析及 Markdown 格式轉換。可執行大量文件批次處理及排程，提供 MD 預覽、文字選取、搜尋與複製，並保留基本標題、段落及條列結構，建立可供全文搜尋、RAG、Knowledge Base 與後續分析使用的 AI-Ready Data。適用技術文件、SOP、歷史 PDF、教材、公文、典藏、法務及機敏文件內網處理。',
   },
   {
-    en: 'AI Engine Platform',
-    zh: '內建多引擎模型中台',
-    d: '支援多推論引擎、地端部署與 GPU 資源配置；具 GPU 共享、模型資源預測、API Key 生命週期管理、RPM 流量控管與使用量統計。',
+    sku: 'ARGENT-SW',
+    name: 'ARGENT 本地端私有知識 AI RAG 問答服務機器人',
+    billing: '永久授權',
+    deliver: 'ARGENT-SW 軟體及永久授權 1 套',
+    pair: '搭配本地端 LLM；ARX-100-OS／PreciseMD-SW 依部署需求搭配',
+    func: '將企業文件與內部資料建立為私有知識庫，透過 RAG 檢索增強技術提供全文搜尋、自然語言問答與資料摘要。支援知識庫建立、文件檢索、FAQ／客服、多輪問答、回答來源引用及知識庫範圍控制，回答可追溯至依據文件。可搭配本地端 LLM；無相關資料時依策略拒答或回覆無資料。適用企業知識庫、內部客服、技術支援、教育訓練、法規查詢、SOP 及法務／行政文件查找。',
   },
   {
-    en: 'Model Permission Control',
-    zh: '模型權限控管',
-    d: '模型層級（Model-level）權限控管，可依部門、角色與應用分別授權可調用的模型實例。',
+    sku: 'ARX-100-OS-MA',
+    name: '本地端作業系統軟體維護合約',
+    billing: '訂閱制（授權 1 年）',
+    deliver: 'ARX-100-OS-MA 第二年起。年度軟體維護服務 1 套／1 年；非新增 OS 永久授權',
+    pair: '—',
+    func: '提供 ARX OS 年度軟體維護，包括軟體版本更新、Bug Fix、安全性修正、ARX OS 相容性維護、基本遠端技術支援、系統升級建議及原廠知識庫／技術公告。不包含客製程式、新 APP、到場服務、資料整理、模型微調、大版本功能開發、第三方軟硬體費用及未列明的額外專案服務。V1.1 定位為次年度 OS 維護，不推定首年服務內容或 PreciseMD／ARGENT 維護包含於 OS MA。',
   },
   {
-    en: 'Model Usage Dashboard',
-    zh: '模型使用量儀表板',
-    d: '依模型統計請求數、Token 用量、回應時間、GPU 使用率、GPU 記憶體使用率與配置，支援即時／日／3 日／週檢視。',
+    sku: 'DOC-100A-SW',
+    name: 'DocLake 本地端海量文件快速搜尋檢索與智慧問答平台（20 萬頁等級）',
+    billing: '訂閱制（授權 1 年）',
+    deliver: 'DOC-100A-SW 軟體年度訂閱 1 套／1 年（20 萬頁等級）',
+    pair: '包含本地端 LLM；ARX-100-OS／PreciseMD-SW 依部署需求搭配',
+    func: '針對 20 萬頁等級文件資料提供本地端海量文件智慧平台，整合文件前處理、OCR／Parsing、Markdown／AI-Ready Data、Indexing、全文關鍵字搜尋、RAG、智慧問答與文件來源引用。使用者可從大量文件快速找到相關內容，並透過自然語言查詢知識與核對回答來源。適用政府機關、公文與研究典藏、金融法遵、法律文件、高科技製造、技術手冊、教育機構及大型企業機敏文件庫。',
   },
   {
-    en: 'Project-based LLM Service Isolation',
-    zh: '專案級別模型隔離',
-    d: '依部門或專案獨立啟動模型實例（支援一對一或一對多部署），配置專屬模型服務與知識空間，支援資料分艙。',
-  },
-  {
-    en: 'One-click Model Deployment',
-    zh: '一鍵模型部署',
-    d: '一鍵導入 APMIC 金融模型、企業自有模型或核備開源模型（整合 Hugging Face），自動配置推論引擎與 GPU 資源。',
-  },
-  {
-    en: 'Model Lifecycle Management',
-    zh: '模型生命週期管理',
-    d: '涵蓋模型上架、版本控管、更新與多版平測，並支援手動切換回先前的穩定版本。',
-  },
-  {
-    en: 'Sensitive Data Stays On-prem',
-    zh: '敏感資料留存地端',
-    d: '模型、文件、向量資料庫、Log 與金融資料完整保留於內網、自有機房或 Air-gapped 環境。',
-  },
-  {
-    en: 'GUI-based Operation Console',
-    zh: '圖形化操作主控台',
-    d: '瀏覽器即可遠端存取的圖形化介面，集中管理模型、API 端點、API Key、App、GPU、系統資源、程序監控、存取與事件日誌、儲存掛載，並支援 OTA 遠端更新。',
-  },
-  {
-    en: 'Admin Dashboard & System Monitoring',
-    zh: '管理儀表板與系統監控',
-    d: '即時監控 GPU、VRAM、GPU 溫度、CPU、RAM、網路、儲存空間、磁碟溫度、程序資源與告警，並集中呈現各服務名稱、類別、狀態與連接埠。',
-  },
-  {
-    en: 'Security Control',
-    zh: '安全控管',
-    d: '黑白名單與 IP 自動封鎖、API 存取控管與日誌；帳號角色權限與職責分離；稽核軌跡；LLM 安全閘道即時遮罩 PII 與金鑰（in-memory 處理、還原僅存地端）；提供 SBOM 佐證文件。',
-  },
-  {
-    en: 'Backup & Restore',
-    zh: '備份與還原',
-    d: '支援 App、模型與向量資料庫備份，並可跨機器（異機）還原。',
-  },
-  {
-    en: 'Agent / MCP / CLI Integration',
-    zh: '多重整合介面',
-    d: '支援 Agent、MCP、CLI 與 API 等多元整合介面，可整合主流代理式程式設計工具，且無需額外訂閱費用。',
-  },
-  {
-    en: 'Data Integration & App Market',
-    zh: '資料整合與 App 商店',
-    d: '支援 NAS 等遠端儲存掛載、App 商店一鍵安裝 GenAI 應用；內建 RAG、OCR 與音視訊轉譯等資料前處理工具。',
+    sku: 'DOC-100B-SW',
+    name: 'DocLake 本地端海量文件快速搜尋檢索與智慧問答平台（50 萬頁等級）',
+    billing: '訂閱制（授權 1 年）',
+    deliver: 'DOC-100B-SW 軟體年度訂閱 1 套／1 年（50 萬頁等級）',
+    pair: '包含本地端 LLM；ARX-100-OS／PreciseMD-SW 依部署需求搭配',
+    func: '針對 50 萬頁等級文件資料提供本地端海量文件智慧平台，整合文件前處理、OCR／Parsing、Markdown／AI-Ready Data、Indexing、全文關鍵字搜尋、RAG、智慧問答與文件來源引用。使用者可從大量文件快速找到相關內容，並透過自然語言查詢知識與核對回答來源。適用政府機關、公文與研究典藏、金融法遵、法律文件、高科技製造、技術手冊、教育機構及大型企業機敏文件庫。',
   },
 ];
 
-// 建議硬體規格 — ARDGE ARX-100 基礎版 AI 一體機
+// 六項共通條件（BOM 各列相同）
+const common = [
+  ['授權類別', 'SVR（伺服器）'],
+  ['交貨方式', 'Lic（授權）'],
+  ['作業系統', 'UNIX'],
+  ['作業系統說明', '本地端部署；運行與適用環境請參照原廠產品說明相關資訊'],
+  ['公有雲', '否'],
+  ['最低購買數／單套授權數', '1／1'],
+  ['產品單位', '套'],
+];
+
+// 建議硬體規格 — ARDGE ARX-100 基礎版 AI 一體機（ARX-100-OS 部署環境）
 const hardware = [
   ['AI 伺服主機', 'NVIDIA Blackwell (GB10) 含以上'],
   ['作業系統', 'ARX OS'],
@@ -92,62 +76,109 @@ const hardware = [
   ['磁碟儲存 Storage', '1TB M.2 NVMe PCIe 4.0 SSD 含以上'],
   ['網路介面 LAN', '1 x 10 Gigabit Ethernet／1 x NVIDIA ConnectX-7 SmartNIC'],
 ];
+
+const no = (i: number) => String(i + 1).padStart(2, '0');
 ---
 
 <BaseLayout>
   <Header />
 
   <main id="top">
-    <!-- 標題（規格公告） -->
+    <!-- 標題 -->
     <section class="masthead">
       <div class="wrap">
         <p class="eyebrow">政府採購共同供應契約</p>
-        <h1>ARX OS 金融行業版</h1>
-        <p class="masthead-sub">ARX OS 是專為地端環境打造的 AI 管理平台，將作業系統、推論引擎、模型與資料治理整合於單一系統。企業無須自建複雜環境，即可在自有機房或 Air-gapped 網路中，快速部署、管理並擴展生成式 AI 模型與應用，兼顧資料主權與維運效率。</p>
+        <h1>共同供應契約專區</h1>
+        <p class="masthead-sub">ARDGE 於電腦軟體共同供應契約上架品項共 6 項，含本地端 AI 模型管理、文件資料前處理、私有知識問答、海量文件搜尋檢索與作業系統軟體維護，皆為本地端部署。</p>
       </div>
     </section>
 
-    <!-- 採購契約資訊 -->
+    <!-- 供應商資格 -->
     <section class="frames">
       <div class="wrap">
         <p class="eyebrow">供應商資格</p>
         <article class="contract-block">
           <h2>116 年第一次電腦軟體共同供應契約採購</h2>
           <dl class="contract-list">
+            <div><dt>組別</dt><dd>人工智慧與數據應用／組別 8</dd></div>
             <div><dt>廠牌</dt><dd>ARDGE</dd></div>
-            <div><dt>原廠名稱</dt><dd>ARDGE</dd></div>
+            <div><dt>原廠名稱</dt><dd>ARDGE.COM</dd></div>
+            <div><dt>原廠中文名稱</dt><dd>開端智能股份有限公司</dd></div>
             <div><dt>產地</dt><dd>台灣</dd></div>
           </dl>
         </article>
       </div>
     </section>
 
-    <!-- 基本規格（軟體） -->
-    <section class="section" id="specs">
+    <!-- 上架品項總覽 -->
+    <section class="section" id="items">
       <div class="wrap">
         <div class="sec-head">
-          <p class="eyebrow">基本規格</p>
-          <dl class="spec-meta">
-            <div><dt>品項</dt><dd>ARX OS 金融行業版</dd></div>
-            <div><dt>組別</dt><dd>人工智慧與數據應用</dd></div>
+          <p class="eyebrow">上架品項</p>
+        </div>
+        <div class="item-table" role="table" aria-label="上架品項總覽">
+          <div class="it-row it-head" role="row">
+            <span role="columnheader">項次</span>
+            <span role="columnheader">品項名稱</span>
+            <span role="columnheader">料號</span>
+            <span role="columnheader">計費方式</span>
+          </div>
+          {items.map((it, i) => (
+            <a class="it-row" role="row" href={`#item-${i + 1}`}>
+              <span class="it-no" role="cell">{no(i)}</span>
+              <span class="it-name" role="cell">{it.name}</span>
+              <span class="it-sku" role="cell">{it.sku}</span>
+              <span class="it-bill" role="cell">{it.billing}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 品項明細 -->
+    <section class="section section-alt" id="details">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">品項明細</p>
+        </div>
+
+        <div class="common-block">
+          <h3>六項共通條件</h3>
+          <dl class="common-list">
+            {common.map(([k, v]) => (
+              <div><dt>{k}</dt><dd>{v}</dd></div>
+            ))}
           </dl>
         </div>
-        <ol class="spec-list">
-          {specs.map((s, i) => (
-            <li class="spec-item">
-              <span class="spec-no">{String(i + 1).padStart(2, '0')}</span>
-              <span class="spec-name">{s.zh}</span>
-            </li>
+
+        <div class="item-cards">
+          {items.map((it, i) => (
+            <article class="item-card" id={`item-${i + 1}`}>
+              <header class="ic-head">
+                <span class="ic-no">{no(i)}</span>
+                <div>
+                  <p class="ic-sku">{it.sku}</p>
+                  <h3>{it.name}</h3>
+                </div>
+              </header>
+              <p class="ic-func">{it.func}</p>
+              <dl class="ic-meta">
+                <div><dt>計費方式</dt><dd>{it.billing}</dd></div>
+                <div><dt>交付軟體及數量</dt><dd>{it.deliver}</dd></div>
+                <div><dt>須搭配軟體品項</dt><dd>{it.pair}</dd></div>
+              </dl>
+            </article>
           ))}
-        </ol>
+        </div>
       </div>
     </section>
 
     <!-- 建議硬體規格 -->
-    <section class="section section-alt" id="hardware">
+    <section class="section" id="hardware">
       <div class="wrap">
         <div class="sec-head">
           <p class="eyebrow">建議硬體規格</p>
+          <p class="sec-note">適用 ARX-100-OS 部署環境</p>
         </div>
         <div class="hw-table" role="table" aria-label="ARX-100 建議硬體規格">
           {hardware.map(([k, v]) => (
@@ -161,17 +192,17 @@ const hardware = [
     </section>
 
     <!-- 採購聯絡 -->
-    <section class="section contact" id="procure-contact">
+    <section class="section section-alt contact" id="procure-contact">
       <div class="wrap contact-inner">
         <div>
           <p class="eyebrow">採購洽詢</p>
           <h2 class="sec-title">採購下單、規格確認或專案規劃</h2>
         </div>
         <div class="contact-actions">
-          <a class="btn btn-primary" href="mailto:usasales@ardge.com?subject=共同供應契約採購洽詢%20-%20ARX%20OS%20金融行業版">
+          <a class="btn btn-primary" href="mailto:usasales@ardge.com?subject=共同供應契約專區採購洽詢">
             usasales@ardge.com
           </a>
-          <a class="btn btn-outline" href="https://www.ardge.com/zh#contact">前往聯絡表單</a>
+          <a class="btn btn-outline" href="https://www.ardge.com/zh/contact">前往聯絡表單</a>
         </div>
       </div>
     </section>
@@ -227,7 +258,7 @@ const hardware = [
     margin: 0;
     display: grid;
     gap: 0;
-    max-width: 320px;
+    max-width: 380px;
   }
 
   .contract-list > div {
@@ -240,7 +271,7 @@ const hardware = [
   .contract-list dt {
     color: var(--gray);
     font-size: 0.92rem;
-    min-width: 84px;
+    min-width: 100px;
   }
 
   .contract-list dd {
@@ -262,63 +293,160 @@ const hardware = [
     margin-bottom: 22px;
   }
 
-  .spec-meta {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .spec-meta > div {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-  }
-
-  .spec-meta dt {
-    font-size: 0.95rem;
-    color: var(--gray);
-  }
-
-  .spec-meta dd {
-    margin: 0;
-    font-size: 1.15rem;
-    font-weight: 900;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-  }
-
   .sec-title {
     font-size: clamp(1.5rem, 3vw, 2.05rem);
     margin: 0;
   }
 
-  /* ---------- 規格清單（編號 + 中文項次，單欄，無分隔線）---------- */
-  .spec-list {
-    list-style: none;
+  .sec-note {
     margin: 0;
-    padding: 0;
-  }
-
-  .spec-item {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    padding: 2px 4px;
-  }
-
-  .spec-no {
-    font-family: var(--font-en);
     font-size: 0.92rem;
+    color: var(--gray);
+  }
+
+  .sec-head .eyebrow + .sec-note {
+    margin-top: -8px;
+  }
+
+  /* ---------- 上架品項總覽 ---------- */
+  .item-table {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .it-row {
+    display: grid;
+    grid-template-columns: 56px 1fr 150px 150px;
+    gap: 16px;
+    align-items: baseline;
+    padding: 13px 20px;
+    border-top: 1px solid var(--line);
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  a.it-row:hover {
+    background: var(--green-tint);
+  }
+
+  .it-head {
+    border-top: none;
+    background: var(--paper-alt);
+    font-size: 0.85rem;
+    color: var(--gray);
+    font-weight: 700;
+  }
+
+  .it-no {
+    font-family: var(--font-en);
     font-weight: 700;
     color: var(--green);
-    min-width: 28px;
   }
 
-  .spec-name {
-    font-size: 1rem;
+  .it-name {
     font-weight: 700;
+  }
+
+  .it-sku {
+    font-family: var(--font-en);
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+
+  .it-bill {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- 品項明細 ---------- */
+  .common-block {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+
+  .common-block h3,
+  .item-card h3 {
+    font-size: 1.05rem;
+    margin: 0;
+  }
+
+  .common-list {
+    margin: 12px 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    column-gap: 28px;
+  }
+
+  .common-list > div,
+  .ic-meta > div {
+    display: flex;
+    gap: 14px;
+    padding: 8px 0;
+    border-top: 1px solid var(--line);
+    font-size: 0.9rem;
+  }
+
+  .common-list dt,
+  .ic-meta dt {
+    color: var(--gray);
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+
+  .common-list dd,
+  .ic-meta dd {
+    margin: 0;
     color: var(--ink);
+  }
+
+  .item-cards {
+    display: grid;
+    gap: 16px;
+  }
+
+  .item-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--green);
+    border-radius: var(--radius);
+    padding: 22px 26px;
+    scroll-margin-top: 84px;
+  }
+
+  .ic-head {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+
+  .ic-no {
+    font-family: var(--font-en);
+    font-weight: 700;
+    color: var(--green);
+  }
+
+  .ic-sku {
+    margin: 0 0 2px;
+    font-family: var(--font-en);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--green-deep);
+  }
+
+  .ic-func {
+    margin: 0 0 14px;
+    font-size: 0.93rem;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+
+  .ic-meta {
+    margin: 0;
   }
 
   /* ---------- 硬體表 ---------- */
@@ -391,6 +519,27 @@ const hardware = [
   @media (max-width: 760px) {
     .section {
       padding-block: 48px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .it-row {
+      grid-template-columns: 36px 1fr;
+      row-gap: 2px;
+    }
+    .it-head {
+      display: none;
+    }
+    .it-sku,
+    .it-bill {
+      grid-column: 2;
+    }
+    .item-card {
+      padding: 18px 18px;
+    }
+    .common-list dt,
+    .ic-meta dt {
+      min-width: 96px;
     }
   }
 
