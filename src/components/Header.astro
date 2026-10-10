@@ -1,71 +1,96 @@
 ---
-// 頁首：沿用 ARDGE 官網導覽結構（產品 / 解決方案 / 關於我們 / 購買通路），末端新增「共同供應契約專區」
+// 頁首：沿用 ARDGE 官網導覽（產品 / 解決方案 / 關於我們 / 購買通路 / 語言），末端新增「共同供應契約專區」
 const site = 'https://www.ardge.com';
+const products = [
+  ['/zh/products/arx-100', 'ARX-100', '邊緣 AI 伺服器'],
+  ['/zh/products/varx-series', 'vARX 系列', '私有 GPU 雲平台'],
+  ['/zh/products/arx-os', 'ARX OS', '邊緣 AI 平台'],
+  ['/zh/products/arx-sovereign-ai-private-cloud', '主權私有 AI 雲', '企業級邊緣 AI 平台'],
+];
+const solutions = [
+  ['/zh/solutions/doclake', 'DOC-100', '私有海量智慧平台'],
+  ['/zh/solutions/ai-data-preprocessing', 'AI 資料前處理引擎', '本地端文件解析與向量化'],
+  ['/zh/solutions/private-intelligent-video-search', '私有智慧影片搜尋', '跨企業影音資料的語意搜尋'],
+  ['/zh/solutions/knowledge-management-appliance', '知識管理設備', '私有、對話式 AI 知識庫'],
+  ['/zh/solutions/private-ai-foundation-for-isv-partners', 'ISV 夥伴私有 AI 基礎平台', '為 ISV 與 SaaS 廠商提供一站式私有 AI 部署'],
+];
+const about = [
+  ['/zh#team', '關於 ARDGE'],
+  ['/zh/newsroom', '最新消息'],
+  ['/zh/resources', '資源中心'],
+  ['/zh/contact', '聯絡我們'],
+];
 ---
 
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href={`${site}/zh`} aria-label="ARDGE 首頁">
-      <img src={`${site}/img/common/logo/ardge-logo.webp`} alt="ARDGE" width="118" height="28" />
+      <img src={`${site}/img/common/logo/ardge-logo.webp`} alt="ARDGE" width="600" height="108" />
     </a>
 
-    <nav class="nav" aria-label="主導覽">
-      <div class="nav-item has-menu">
-        <span class="nav-label">產品</span>
-        <div class="menu">
-          <a href={`${site}/zh/products/arx-100`}><strong>ARX-100</strong><span>邊緣 AI 伺服器</span></a>
-          <a href={`${site}/zh/products/varx-series`}><strong>vARX 系列</strong><span>私有 GPU 雲平台</span></a>
-          <a href={`${site}/zh/products/arx-os`}><strong>ARX OS</strong><span>邊緣 AI 平台</span></a>
-          <a href={`${site}/zh/products/arx-sovereign-ai-private-cloud`}><strong>主權私有 AI 雲</strong><span>企業級邊緣 AI 平台</span></a>
+    <div class="nav-right">
+      <nav class="nav" aria-label="主導覽">
+        <div class="nav-item has-menu">
+          <span class="nav-link" tabindex="0">產品 <svg class="caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 15.4l-6-6L7.4 8l4.6 4.6L16.6 8L18 9.4z" /></svg></span>
+          <div class="menu">
+            {products.map(([href, t, d]) => (
+              <a href={`${site}${href}`}><strong>{t}</strong><span>{d}</span></a>
+            ))}
+          </div>
+        </div>
+
+        <div class="nav-item has-menu">
+          <span class="nav-link" tabindex="0">解決方案 <svg class="caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 15.4l-6-6L7.4 8l4.6 4.6L16.6 8L18 9.4z" /></svg></span>
+          <div class="menu">
+            {solutions.map(([href, t, d]) => (
+              <a href={`${site}${href}`}><strong>{t}</strong><span>{d}</span></a>
+            ))}
+          </div>
+        </div>
+
+        <div class="nav-item has-menu">
+          <span class="nav-link" tabindex="0">關於我們 <svg class="caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 15.4l-6-6L7.4 8l4.6 4.6L16.6 8L18 9.4z" /></svg></span>
+          <div class="menu menu-sm">
+            {about.map(([href, t]) => (
+              <a href={`${site}${href}`}><strong>{t}</strong></a>
+            ))}
+          </div>
+        </div>
+
+        <a class="nav-link" href={`${site}/zh/where-to-buy`}>購買通路</a>
+        <a class="nav-link nav-current" href="#top" aria-current="page">共同供應契約專區</a>
+      </nav>
+
+      <div class="has-menu lang-wrap">
+        <button class="lang" type="button" aria-label="語言">
+          <span class="lang-l">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20a10 10 0 0 0 0-20m6.9 6h-2.95a15.7 15.7 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.9 8M12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96M4.26 14a8.2 8.2 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A8 8 0 0 1 5.08 16m2.95-8H5.08a8 8 0 0 1 4.33-3.56A15.7 15.7 0 0 0 8.03 8M12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96M14.34 14H9.66a14.7 14.7 0 0 1 0-4h4.68a14.7 14.7 0 0 1 0 4m.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M16.36 14a16.5 16.5 0 0 0 0-4h3.38a8.2 8.2 0 0 1 0 4z" /></svg>
+            中文
+          </span>
+          <svg class="caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 15.4l-6-6L7.4 8l4.6 4.6L16.6 8L18 9.4z" /></svg>
+        </button>
+        <div class="menu menu-lang">
+          <a href={`${site}/zh`} class="menu-on"><strong>中文</strong></a>
+          <a href={`${site}/`}><strong>English</strong></a>
         </div>
       </div>
 
-      <div class="nav-item has-menu">
-        <span class="nav-label">解決方案</span>
-        <div class="menu">
-          <a href={`${site}/zh/solutions/doclake`}><strong>DOC-100</strong><span>私有海量智慧平台</span></a>
-          <a href={`${site}/zh/solutions/ai-data-preprocessing`}><strong>AI 資料前處理引擎</strong><span>本地端文件解析與向量化</span></a>
-          <a href={`${site}/zh/solutions/private-intelligent-video-search`}><strong>私有智慧影片搜尋</strong><span>跨企業影音資料的語意搜尋</span></a>
-          <a href={`${site}/zh/solutions/knowledge-management-appliance`}><strong>知識管理設備</strong><span>私有、對話式 AI 知識庫</span></a>
-          <a href={`${site}/zh/solutions/private-ai-foundation-for-isv-partners`}><strong>ISV 夥伴私有 AI 基礎平台</strong><span>為 ISV 與 SaaS 廠商提供一站式私有 AI 部署</span></a>
-        </div>
-      </div>
-
-      <div class="nav-item has-menu">
-        <span class="nav-label">關於我們</span>
-        <div class="menu menu-sm">
-          <a href={`${site}/zh#team`}><strong>關於 ARDGE</strong></a>
-          <a href={`${site}/zh/newsroom`}><strong>最新消息</strong></a>
-          <a href={`${site}/zh/resources`}><strong>資源中心</strong></a>
-          <a href={`${site}/zh/contact`}><strong>聯絡我們</strong></a>
-        </div>
-      </div>
-
-      <div class="nav-item"><a href={`${site}/zh/where-to-buy`}>購買通路</a></div>
-      <div class="nav-item"><a href="#top" class="nav-current" aria-current="page">共同供應契約專區</a></div>
-    </nav>
-
-    <div class="header-right">
-      <a class="lang" href={`${site}/`}>EN</a>
-      <a class="cta-mini" href="#procure-contact">採購洽詢</a>
-      <button class="burger" aria-label="開啟選單" aria-expanded="false">
+      <button class="burger" type="button" aria-label="開啟選單" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 
   <nav class="mobile-nav" aria-label="行動選單">
-    <a href={`${site}/zh/products/arx-100`}>ARX-100</a>
-    <a href={`${site}/zh/products/varx-series`}>vARX 系列</a>
-    <a href={`${site}/zh/products/arx-os`}>ARX OS</a>
-    <a href={`${site}/zh/products/arx-sovereign-ai-private-cloud`}>主權私有 AI 雲</a>
-    <a href={`${site}/zh/solutions/doclake`}>DOC-100</a>
-    <a href={`${site}/zh#team`}>關於 ARDGE</a>
-    <a href={`${site}/zh/contact`}>聯絡我們</a>
-    <a href={`${site}/zh/where-to-buy`}>購買通路</a>
-    <a href="#top" class="mobile-current">共同供應契約專區</a>
-    <a href="#procure-contact">採購洽詢</a>
-    <a href={`${site}/`}>EN</a>
+    <p class="m-label">產品</p>
+    {products.map(([href, t]) => <a href={`${site}${href}`}>{t}</a>)}
+    <p class="m-label">解決方案</p>
+    {solutions.map(([href, t]) => <a href={`${site}${href}`}>{t}</a>)}
+    <p class="m-label">關於我們</p>
+    {about.map(([href, t]) => <a href={`${site}${href}`}>{t}</a>)}
+    <a class="m-top" href={`${site}/zh/where-to-buy`}>購買通路</a>
+    <a class="m-top m-current" href="#top">共同供應契約專區</a>
+    <a class="m-top" href={`${site}/`}>English</a>
   </nav>
 </header>
 
@@ -73,9 +98,9 @@ const site = 'https://www.ardge.com';
   .site-header {
     position: sticky;
     top: 0;
-    z-index: 50;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: saturate(180%) blur(12px);
+    z-index: 100;
+    height: var(--navbar);
+    background: #fff;
     border-bottom: 1px solid var(--line);
   }
 
@@ -83,178 +108,266 @@ const site = 'https://www.ardge.com';
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 68px;
-    gap: 20px;
+    height: 100%;
   }
 
   .brand img {
-    height: 26px;
+    height: 24px;
     width: auto;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
   .nav {
     display: flex;
     align-items: center;
-    gap: 4px;
-    margin-left: auto;
+    gap: 2px;
+    font-size: 0.875rem;
   }
 
   .nav-item {
     position: relative;
+    display: flex;
+    align-items: center;
   }
 
-  .nav-item > a,
-  .nav-item > .nav-label {
+  .nav-link {
     display: inline-flex;
     align-items: center;
-    padding: 10px 14px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--ink);
-    cursor: pointer;
+    gap: 4px;
+    padding: 7px 13px;
     border-radius: 8px;
+    font-weight: 450;
+    color: var(--fg-muted);
+    cursor: pointer;
+    transition:
+      color 0.15s,
+      background-color 0.15s;
   }
 
-  .nav-item > a:hover,
-  .nav-item > .nav-label:hover {
-    color: var(--green-deep);
+  .nav-item > .nav-link {
+    cursor: default;
   }
 
-  .has-menu .menu {
+  .nav-link:hover {
+    color: var(--fg);
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  .nav-current,
+  .nav-current:hover {
+    color: var(--green-dark);
+    font-weight: 600;
+  }
+
+  .caret {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+    opacity: 0.6;
+  }
+
+  /* 下拉選單（官網 nav-dropdown） */
+  .has-menu {
+    position: relative;
+  }
+
+  .menu {
     position: absolute;
-    top: calc(100% + 8px);
+    top: 100%;
     left: 0;
-    min-width: 260px;
-    background: #fff;
+    margin-top: 14px;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px;
+    background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: 0 24px 48px -20px rgba(35, 37, 42, 0.28);
-    padding: 8px;
+    border-radius: var(--radius-menu);
+    box-shadow: 0 20px 60px -20px rgba(15, 23, 42, 0.14);
     opacity: 0;
     visibility: hidden;
-    transform: translateY(6px);
-    transition: all 0.18s ease;
+    pointer-events: none;
+    translate: 0 -8px;
+    transition:
+      opacity 0.15s,
+      translate 0.15s,
+      visibility 0.15s;
   }
 
-  .has-menu:hover .menu,
-  .has-menu:focus-within .menu {
+  /* 滑入時保持選單不消失的橋接區 */
+  .menu::before {
+    content: '';
+    position: absolute;
+    inset: -16px 0 auto 0;
+    height: 16px;
+  }
+
+  .has-menu:hover > .menu,
+  .has-menu:focus-within > .menu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    pointer-events: auto;
+    translate: 0 0;
   }
 
   .menu a {
     display: flex;
     flex-direction: column;
-    padding: 11px 14px;
-    border-radius: 9px;
-    line-height: 1.4;
+    padding: 10px 12px;
+    border-radius: var(--radius-card);
+    transition: background 0.15s;
   }
 
   .menu a:hover {
-    background: var(--green-tint);
+    background: rgba(0, 0, 0, 0.04);
   }
 
   .menu strong {
-    font-size: 0.95rem;
-    font-weight: 700;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 2px;
   }
 
   .menu span {
-    font-size: 0.82rem;
-    color: var(--gray);
+    font-size: 13px;
+    line-height: 1.375;
+    color: var(--fg-faint);
   }
 
   .menu-sm {
     min-width: 160px;
   }
 
-  .nav-item > a.nav-current {
-    color: var(--green-deep);
-    font-weight: 700;
-    background: var(--green-tint);
+  .menu-sm strong,
+  .menu-lang strong {
+    margin-bottom: 0;
   }
 
-  .mobile-nav a.mobile-current {
-    color: var(--green-deep);
-    font-weight: 700;
-  }
-
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
+  /* 語言選擇（官網樣式） */
   .lang {
-    font-family: var(--font-en);
-    font-weight: 600;
-    font-size: 0.85rem;
-    padding: 8px 12px;
-    color: var(--gray);
-    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    height: 36px;
+    min-width: 120px;
+    padding: 0 8px 0 12px;
+    font: inherit;
+    font-size: 0.875rem;
+    color: var(--fg);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: border-color 0.15s;
   }
 
   .lang:hover {
-    color: var(--green-deep);
+    border-color: var(--fg-faint);
   }
 
-  .cta-mini {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #fff;
-    background: var(--ink);
-    padding: 9px 18px;
-    border-radius: 999px;
-    transition: background 0.15s ease;
+  .lang-l {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
 
-  .cta-mini:hover {
-    background: var(--green-deep);
+  .lang-l svg {
+    width: 16px;
+    height: 16px;
+    fill: var(--fg-faint);
   }
 
+  .lang .caret {
+    width: 18px;
+    height: 18px;
+    fill: var(--fg-faint);
+    opacity: 1;
+  }
+
+  .menu-lang {
+    left: auto;
+    right: 0;
+    min-width: 120px;
+    margin-top: 6px;
+  }
+
+  .menu-lang .menu-on strong {
+    color: var(--green-dark);
+  }
+
+  /* 行動選單 */
   .burger {
     display: none;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     background: none;
-    border: 1px solid var(--line);
-    border-radius: 10px;
+    border: 0;
     cursor: pointer;
   }
 
   .burger span {
     height: 2px;
     width: 20px;
-    background: var(--ink);
+    background: var(--fg);
     margin-inline: auto;
-    transition: 0.2s;
   }
 
   .mobile-nav {
     display: none;
     flex-direction: column;
-    padding: 8px 24px 18px;
-    border-top: 1px solid var(--line);
+    max-height: calc(100vh - var(--navbar));
+    overflow-y: auto;
+    padding: 8px 20px 20px;
     background: #fff;
-  }
-
-  .mobile-nav a {
-    padding: 13px 4px;
-    font-weight: 500;
-    border-bottom: 1px solid var(--paper-alt);
+    border-bottom: 1px solid var(--line);
   }
 
   .mobile-nav.open {
     display: flex;
   }
 
-  @media (max-width: 1080px) {
+  .m-label {
+    margin: 14px 0 4px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--fg-faint);
+  }
+
+  .mobile-nav a {
+    padding: 9px 0;
+    font-size: 0.95rem;
+    color: var(--fg-muted);
+  }
+
+  .mobile-nav .m-top {
+    border-top: 1px solid var(--line-soft);
+    padding: 13px 0;
+    color: var(--fg);
+    font-weight: 500;
+  }
+
+  .mobile-nav .m-current {
+    color: var(--green-dark);
+    font-weight: 600;
+  }
+
+  @media (max-width: 1023px) {
     .nav,
-    .cta-mini {
+    .lang-wrap {
       display: none;
     }
     .burger {
